@@ -70,10 +70,7 @@ Respect the terms of use for Wikipedia and OSM Nominatim. This project keeps geo
 ### Automate daily runs (GitHub Actions)
 - Add the following repository secrets:
   - `OWM_API_KEY`: your OpenWeatherMap API key
-  - `KAGGLE_USERNAME`: your Kaggle username
-  - `KAGGLE_KEY`: your Kaggle API key (create from Kaggle account settings)
-- The workflow `.github/workflows/daily.yml` runs every day at 12:00 Dhaka time (06:00 UTC), collects data, commits to the repo, and publishes/versions a Kaggle dataset.
-- Kaggle metadata lives in `kaggle/dataset-metadata.json`. The workflow injects your username and uploads `master.csv` and `README.md`.
+- The workflow `.github/workflows/daily.yml` runs every day at 12:00 Dhaka time (06:00 UTC), collects data, and commits updates to the repository.
 
 If you prefer running locally on Windows without GitHub:
 - Use Task Scheduler to run `python scripts/collect_daily.py` daily at 12:00.

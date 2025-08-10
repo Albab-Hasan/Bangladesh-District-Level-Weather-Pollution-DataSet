@@ -1,4 +1,4 @@
-name: Daily dataset collection and Kaggle publish
+name: Daily dataset collection
 
 on:
   schedule:
@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt kaggle
+          pip install -r requirements.txt
 
       - name: Run daily collector
         env:
@@ -41,35 +41,6 @@ jobs:
             git push
           fi
 
-      - name: Prepare Kaggle package
-        env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-        run: |
-          mkdir -p kaggle_pkg
-          cp kaggle/dataset-metadata.json kaggle_pkg/dataset-metadata.json
-          sed -i "s/USERNAME_PLACEHOLDER/${KAGGLE_USERNAME}/" kaggle_pkg/dataset-metadata.json
-          cp README.md kaggle_pkg/README.md
-          cp data/master.csv kaggle_pkg/master.csv
-
-      - name: Configure Kaggle credentials
-        env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-        run: |
-          mkdir -p ~/.kaggle
-          echo "{\"username\":\"${KAGGLE_USERNAME}\",\"key\":\"${KAGGLE_KEY}\"}" > ~/.kaggle/kaggle.json
-          chmod 600 ~/.kaggle/kaggle.json
-
-      - name: Create or version Kaggle dataset
-        env:
-          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-        run: |
-          set -e
-          DATASET_ID="${KAGGLE_USERNAME}/bangladesh-district-weather-airquality-daily"
-          if kaggle datasets status -d "$DATASET_ID" > /dev/null 2>&1; then
-            kaggle datasets version -p kaggle_pkg -m "Daily update $(date -u +%Y-%m-%d)" -r csv
-          else
-            kaggle datasets create -p kaggle_pkg -r csv
-          fi
+      # Kaggle publishing removed per project scope
 
 
