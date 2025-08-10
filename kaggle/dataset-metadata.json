@@ -1,0 +1,22 @@
+{
+  "title": "Bangladesh District Weather & Air Quality (Daily)",
+  "id": "USERNAME_PLACEHOLDER/bangladesh-district-weather-airquality-daily",
+  "licenses": [
+    { "name": "CC0-1.0" }
+  ],
+  "subtitle": "Daily weather and air quality metrics across Bangladesh's 64 districts",
+  "description": "Daily dataset collected from OpenWeatherMap for 64 districts of Bangladesh. Columns: date, district, division, lat, lon, temp_c, humidity, pressure, wind_speed, clouds, rain, aqi, pm2_5, pm10, o3, no2, so2, co.",
+  "keywords": ["Bangladesh", "weather", "air quality", "AQI", "OpenWeatherMap", "environment"],
+  "resources": [
+    {
+      "path": "master.csv",
+      "description": "Cumulative daily dataset"
+    },
+    {
+      "path": "README.md",
+      "description": "Project overview and usage"
+    }
+  ]
+}
+
+
