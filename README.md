@@ -9,7 +9,7 @@ This project collects daily weather and air quality metrics for Bangladesh's 64 
 
 ### Output schema
 CSV columns per row (one per district per day):
-`date,district,division,lat,lon,temp_c,humidity,pressure,wind_speed,clouds,rain,snow,aqi,pm2_5,pm10,o3,no2,so2,co`
+`date,district,division,lat,lon,temp_c,humidity,pressure,wind_speed,clouds,rain,aqi,pm2_5,pm10,o3,no2,so2,co`
 
 ### Quickstart
 1) Create a virtual environment and install deps
@@ -64,15 +64,3 @@ Flags:
   - `master.csv`: cumulative dataset
 - `cache/geocode_cache.json`: raw geocoder cache
 
-### Disclaimer
-Respect the terms of use for Wikipedia and OSM Nominatim. This project keeps geocoding calls minimal and caches results locally.
-
-### Automate daily runs (GitHub Actions)
-- Add the following repository secrets:
-  - `OWM_API_KEY`: your OpenWeatherMap API key
-- The workflow `.github/workflows/daily.yml` runs every day at 12:00 Dhaka time (06:00 UTC), collects data, and commits updates to the repository.
-
-If you prefer running locally on Windows without GitHub:
-- Use Task Scheduler to run `python scripts/collect_daily.py` daily at 12:00.
-  - Program: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`
-  - Arguments: `-NoProfile -ExecutionPolicy Bypass -Command "cd '<repo path>'; .\.venv\\Scripts\\Activate.ps1; python scripts/collect_daily.py"`
